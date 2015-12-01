@@ -47,7 +47,7 @@ class SendGridNewsletterUnsubscribes
       next puts "----#{name} has no unsubscribes on it" if rows.empty?
       CSV.open(filepath, "ab") do |csv|
         rows.each do |row| #open json to parse
-          csv << row.values unless hash_results[row['email']] # Check to make sure email is unique
+          csv << [row['email']] unless hash_results[row['email']] # Check to make sure email is unique
           hash_results[row['email']] = true
         end
       end
